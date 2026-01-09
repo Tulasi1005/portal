@@ -10,7 +10,14 @@ dotenv.config();
 
 const app = express();
 
-app.use(cors());
+/* ✅ CORS — MUST BE FIRST */
+app.use(cors({
+  origin: true,           // allow all origins
+  credentials: true,
+}));
+
+/* ✅ Handle preflight explicitly */
+app.options("*", cors());
 app.use(express.json());
 
 // ✅ Connect MongoDB using ENV
