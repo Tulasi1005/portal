@@ -33,7 +33,7 @@ export default function AttendanceDetailsPage() {
     };
     setEmployee(emp);
 
-    fetch(`http://localhost:5000/api/attendance/${userId}`)
+    fetch(`${process.env.REACT_APP_API_URL}/api/attendance/${userId}`)
       .then((res) => {
         if (!res.ok) throw new Error("Failed to load attendance records");
         return res.json();

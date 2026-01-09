@@ -28,7 +28,7 @@ export default function AdminDashboard() {
     setLoading(true);
     setSelectedBranch(branch);
     try {
-      const res = await fetch(`http://localhost:5000/api/attendance/branch/${encodeURIComponent(branch)}`);
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/api/attendance/branch/${encodeURIComponent(branch)}`);
       if (!res.ok) throw new Error("Failed to fetch attendance");
       const data = await res.json();
       setBranchAttendance(data);
@@ -119,7 +119,7 @@ export default function AdminDashboard() {
         branchAttendance.map(async (emp, rowIndex) => {
           let fullRecords = [];
           try {
-            const res = await fetch(`http://localhost:5000/api/attendance/${emp.userId}`);
+            const res = await fetch(`${process.env.REACT_APP_API_URL}/api/attendance/${emp.userId}`);
             if (res.ok) fullRecords = await res.json();
           } catch (e) {
             console.warn(`No data for ${emp.userId}`);
